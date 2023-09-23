@@ -1,0 +1,25 @@
+[package]
+name = "postman2openapi-cli"
+authors = ["Kevin Swiber <kswiber@gmail.com>"]
+version = "1.1.0"
+description = "Convert a Postman collection to an OpenAPI definition. "
+homepage = "https://github.com/kevinswiber/postman2openapi"
+repository = "https://github.com/kevinswiber/postman2openapi"
+license = "Apache-2.0"
+readme = "README.md"
+documentation = "https://docs.rs/postman2openapi"
+build = "build.rs"
+edition = "2021"
+
+[[bin]]
+name = "postman2openapi"
+path = "src/main.rs"
+
+[build-dependencies]
+chrono = "0.4"
+
+[dependencies]
+atty = "0.2"
+clap = { version = "3.2", features = ["cargo"] }
+lazy_static = "1.4.0"
+postman2openapi = { path = "../", version = "1.1.0" }

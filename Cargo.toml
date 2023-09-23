@@ -4,25 +4,19 @@ description = "Convert a Postman collection to an OpenAPI definition. "
 homepage = "https://github.com/kevinswiber/postman2openapi"
 repository = "https://github.com/kevinswiber/postman2openapi"
 license = "Apache-2.0"
-version = "1.0.0"
+version = "1.1.0"
 authors = ["Kevin Swiber <kswiber@gmail.com>"]
-build = "build.rs"
 readme = "README.md"
 documentation = "https://docs.rs/postman2openapi"
 edition = "2021"
 
-[features]
-binary = ["clap", "atty"]
+[workspace]
+members = ["cli"]
 
 [lib]
 name = "postman2openapi"
 path = "src/lib.rs"
 crate-type = ["cdylib", "rlib"]
-
-[[bin]]
-name = "postman2openapi"
-path = "src/main.rs"
-required-features = ["binary"]
 
 [dependencies]
 anyhow = "1.0"
@@ -36,19 +30,13 @@ serde_derive = "1.0"
 serde_json = { version = "1.0", features = ["raw_value"]}
 thiserror = "1.0"
 
-# binary only
-atty = { version = "0.2", optional = true }
-clap = { version = "3.2", optional = true, features = ["cargo"] }
-
-[build-dependencies]
-chrono = "0.4"
-
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 serde_yaml = "0.9"
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-wasm-bindgen = { version = "0.2", features=["serde-serialize"] }
 console_error_panic_hook = { version = "0.1.6", optional = true }
+gloo-utils = { version = "0.2", features = ["serde"] }
+wasm-bindgen = "0.2"
 wee_alloc = { version = "0.4.5", optional = true }
 
 
